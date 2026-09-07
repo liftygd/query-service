@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\QueryService.Domain\QueryService.Domain.csproj" />
+      <ProjectReference Include="..\QueryService.Infrastructure\QueryService.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
