@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace QueryService.Infrastructure;
+namespace Infrastructure;
 
 public class BaseDbContext : DbContext
 {

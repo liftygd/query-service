@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace QueryService.Domain.Entities.User;
+namespace Domain.Entities.User;
 
 [Table("user_sign_in")]
 [Comment("Данные по авторизации пользователей.")]

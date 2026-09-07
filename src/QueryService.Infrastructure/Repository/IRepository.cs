@@ -1,6 +1,6 @@
-﻿using QueryService.Domain.Abstract;
+﻿using Domain.Abstract;
 
-namespace QueryService.Infrastructure.Repository;
+namespace Infrastructure.Repository;
 
 /// <summary>
 /// Интерфейс для работы с базой данных.

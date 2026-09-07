@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace QueryService.Domain.Entities.Query;
+namespace Domain.Entities.Query;
 
 [Table("query_user_statistics")]
 [Comment("Данные для запросов по статистике пользователей.")]

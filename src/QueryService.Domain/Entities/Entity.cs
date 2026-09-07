@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using QueryService.Domain.Abstract;
+using Domain.Abstract;
 
-namespace QueryService.Domain.Entities;
+namespace Domain.Entities;
 
 public class Entity<T> : IEntity<T>
 {

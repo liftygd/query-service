@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QueryService.Domain.Abstract;
+using Domain.Abstract;
 
-namespace QueryService.Infrastructure.Repository;
+namespace Infrastructure.Repository;
 
 public class Repository<TEntity>(
     BaseDbContext databaseContext)

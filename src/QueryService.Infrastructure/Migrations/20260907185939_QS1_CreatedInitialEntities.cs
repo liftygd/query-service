@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using QueryService.Domain.Enums;
+using Domain.Enums;
 
 #nullable disable
 
-namespace QueryService.Infrastructure.Migrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class QS1_CreatedInitialEntities : Migration

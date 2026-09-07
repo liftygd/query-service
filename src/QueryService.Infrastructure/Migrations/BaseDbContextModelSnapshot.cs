@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using QueryService.Domain.Enums;
-using QueryService.Infrastructure;
+using Domain.Enums;
+using Infrastructure;
 
 #nullable disable
 
-namespace QueryService.Infrastructure.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
     partial class BaseDbContextModelSnapshot : ModelSnapshot

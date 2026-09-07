@@ -1,4 +1,4 @@
-﻿namespace QueryService.Domain.Abstract;
+﻿namespace Domain.Abstract;
 
 /// <summary>
 /// Интерфейс базовой сущности.

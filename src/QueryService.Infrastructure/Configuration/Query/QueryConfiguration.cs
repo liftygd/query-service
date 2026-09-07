@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using QueryService.Domain.Entities.Query;
+using Domain.Entities.Query;
 
-namespace QueryService.Infrastructure.Configuration.Query;
+namespace Infrastructure.Configuration;
 
 public class QueryConfiguration : IEntityTypeConfiguration<EQuery>
 {

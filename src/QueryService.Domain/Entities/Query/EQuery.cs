@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using QueryService.Domain.Enums;
+using Domain.Enums;
 
-namespace QueryService.Domain.Entities.Query;
+namespace Domain.Entities.Query;
 
 [Table("query")]
 [Comment("Таблица с текущими запросами.")]
@@ -19,6 +19,10 @@ public class EQuery : Entity<Guid>
     [Column("message")]
     [Comment("Сообщение от запроса.")]
     public string? Message { get; set; }
+    
+    [Column("completed_time")]
+    [Comment("Время, когда запрос завершился.")]
+    public DateTime? CompletedTime { get; set; }
     
     public List<EQueryUserStatistics> QueryUserStatistics { get; set; }
 }

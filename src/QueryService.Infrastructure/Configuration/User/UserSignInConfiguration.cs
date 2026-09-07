@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using QueryService.Domain.Entities.User;
+using Domain.Entities.User;
 
-namespace QueryService.Infrastructure.Configuration.User;
+namespace Infrastructure.Configuration;
 
 public class UserSignInConfiguration : IEntityTypeConfiguration<EUserSignIn>
 {

@@ -11,4 +11,13 @@
       <ProjectReference Include="..\QueryService.Infrastructure\QueryService.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Runtime\Workers\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="9.0.6" />
+    </ItemGroup>
+
 </Project>

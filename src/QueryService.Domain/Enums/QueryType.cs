@@ -1,4 +1,4 @@
-﻿namespace QueryService.Domain.Enums;
+﻿namespace Domain.Enums;
 
 /// <summary>
 /// Типы запросов.
