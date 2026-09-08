@@ -20,20 +20,30 @@ services:
   query.api:
     image: query.api
     build: 
-      context: ./src
-      dockerfile: QueryService.API/Dockerfile
+      context: ./
+      dockerfile: src/QueryService.API/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Release
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__Default=Server=query.db;Port=5432;Database=query_service;Username=postgres;Password=postgres
     depends_on:
         query.db:
           condition: service_healthy
+        query.test:
+          condition: service_completed_successfully
     ports:
       - "5000:8080"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  query.test:
+    build:
+      context: ./
+      dockerfile: tests/QueryService.Tests/Dockerfile
+    command: dotnet test -c Release --no-build
+    ports:
+      - "5001:8081"
 
 volumes:
   postgres_query:

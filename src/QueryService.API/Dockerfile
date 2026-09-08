@@ -7,13 +7,13 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["QueryService.API/QueryService.API.csproj", "QueryService.API/"]
-COPY ["QueryService.Infrastructure/QueryService.Infrastructure.csproj", "QueryService.Infrastructure/"]
-COPY ["QueryService.Domain/QueryService.Domain.csproj", "QueryService.Domain/"]
-COPY ["QueryService.Application/QueryService.Application.csproj", "QueryService.Application/"]
-RUN dotnet restore "QueryService.API/QueryService.API.csproj"
+COPY ["src/QueryService.API/QueryService.API.csproj", "src/QueryService.API/"]
+COPY ["src/QueryService.Infrastructure/QueryService.Infrastructure.csproj", "src/QueryService.Infrastructure/"]
+COPY ["src/QueryService.Domain/QueryService.Domain.csproj", "src/QueryService.Domain/"]
+COPY ["src/QueryService.Application/QueryService.Application.csproj", "src/QueryService.Application/"]
+RUN dotnet restore "src/QueryService.API/QueryService.API.csproj"
 COPY . .
-WORKDIR "/src/QueryService.API"
+WORKDIR "src/QueryService.API"
 RUN dotnet build "./QueryService.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

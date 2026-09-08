@@ -1,7 +1,9 @@
-﻿using Application.Services.QueryManagerService;
+﻿using Application.Options;
+using Application.Services.QueryManagerService;
 using Domain.Contracts.Base;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace Application.Runtime.Workers;
 
@@ -17,17 +19,19 @@ public class QueryWorker(
 
             var queryService = scope.ServiceProvider
                 .GetRequiredService<IQueryManagerService>();
+            var options = scope.ServiceProvider
+                .GetRequiredService<IOptions<QueryOptions>>();
 
             var queries = await queryService.GetPendingQueries(new Request
             {
-                Take = 10
+                Take = options.Value.WorkerBatchSize
             });
 
             foreach (var query in queries)
                 await queryService.ExecuteQueryAsync(query);
 
             await Task.Delay(
-                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(options.Value.WorkerPollIntervalSeconds),
                 stoppingToken);
         }
     }
