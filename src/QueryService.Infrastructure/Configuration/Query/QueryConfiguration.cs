@@ -9,5 +9,8 @@ public class QueryConfiguration : IEntityTypeConfiguration<EQuery>
     public void Configure(EntityTypeBuilder<EQuery> builder)
     {
         builder.HasKey(e => e.Id);
+
+        builder.HasIndex(e => e.QueryType);
+        builder.HasIndex(e => e.State);
     }
 }

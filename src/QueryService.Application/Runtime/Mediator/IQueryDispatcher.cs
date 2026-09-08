@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.Query;
+using Domain.Entities.Query;
 
 namespace Application.Runtime.Mediator;
 
@@ -11,5 +12,14 @@ public interface IQueryDispatcher
     /// Распределение запросов.
     /// </summary>
     /// <param name="query">Данные запроса.</param>
-    Task ExecuteAsync(QueryDispatch query);
+    /// <param name="request">Данные для фильтрации.</param>
+    Task ExecuteAsync(QueryDispatchRequest request, EQuery query);
+    
+    /// <summary>
+    /// Получение результата запроса.
+    /// </summary>
+    /// <param name="query">Данные запроса.</param>
+    /// <typeparam name="TResponse">Тип данных запроса.</typeparam>
+    /// <returns>Данные или NULL.</returns>
+    Task<TResponse?> GetQueryResultAsync<TResponse>(EQuery query);
 }

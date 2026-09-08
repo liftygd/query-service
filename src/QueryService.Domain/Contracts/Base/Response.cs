@@ -1,6 +1,6 @@
 ﻿using Swashbuckle.AspNetCore.Annotations;
 
-namespace Application.Contracts.Base;
+namespace Domain.Contracts.Base;
 
 [SwaggerSchema("Базовый класс для ответов")]
 public class Response<T>

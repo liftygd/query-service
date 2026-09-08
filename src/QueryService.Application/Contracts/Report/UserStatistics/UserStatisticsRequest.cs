@@ -1,7 +1,7 @@
-﻿using Application.Contracts.Base;
+﻿using Domain.Contracts.Base;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Application.Contracts.UserStatistics;
+namespace Application.Contracts.Report.Requests;
 
 [SwaggerSchema("Запрос для отчетности по авторизации пользователей")]
 public sealed class UserStatisticsRequest : Request

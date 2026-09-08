@@ -1,6 +1,6 @@
 ﻿using Swashbuckle.AspNetCore.Annotations;
 
-namespace Application.Contracts.Base;
+namespace Domain.Contracts.Base;
 
 [SwaggerSchema("Базовый класс для запросов")]
 public class Request
@@ -10,4 +10,10 @@ public class Request
     
     [SwaggerSchema("Фильтр по дате - Дата По")]
     public DateTime? DateTo { get; init; }
+    
+    [SwaggerSchema("Количество возвращаемых элементов")]
+    public int? Take { get; init; }
+    
+    [SwaggerSchema("Количество пропущенных групп элементов")]
+    public int? Skip { get; init; }
 }

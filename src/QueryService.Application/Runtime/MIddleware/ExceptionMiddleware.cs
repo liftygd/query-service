@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Application.Contracts.Base;
+using Domain.Contracts.Base;
 
 namespace Application.Runtime.MIddleware;
 
