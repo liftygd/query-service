@@ -27,6 +27,7 @@ public class ExceptionMiddleware(
             await httpContext.Response.WriteAsJsonAsync(
                 new Response<string>
                 {
+                    Data = "Операция завершилась с ошибкой",
                     Error = new Error
                     {
                         Message = ex.Message,

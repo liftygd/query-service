@@ -1,4 +1,5 @@
-﻿using Swashbuckle.AspNetCore.Annotations;
+﻿using Application.Contracts.Query;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Contracts.Report.Data;
 

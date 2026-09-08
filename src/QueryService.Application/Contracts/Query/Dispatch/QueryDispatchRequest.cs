@@ -8,8 +8,14 @@ namespace Application.Contracts.Query;
 public class QueryDispatchRequest : Request
 {
     [SwaggerSchema("Идентификатор запроса")]
-    public Guid QueryId { get; init; }
+    public Guid? QueryId { get => queryId; init => SetQueryId(value); }
+    private Guid? queryId;
     
     [SwaggerSchema("Тип запроса")]
-    public QueryType QueryType { get; init; }
+    public QueryType QueryType { get; set; }
+
+    public void SetQueryId(Guid? newId)
+    {
+        queryId ??= newId;
+    }
 }

@@ -4,7 +4,7 @@ using Infrastructure.Repository;
 
 namespace Application.Services.UserService;
 
-public class UserService(
+public sealed class UserService(
     IRepository<EUserSignIn> userSignInRepo)
     : IUserService
 {
@@ -14,6 +14,8 @@ public class UserService(
         {
             UserId = signInRequest.UserId
         });
+        
+        await userSignInRepo.SaveChangesAsync();
         
         return true;
     }

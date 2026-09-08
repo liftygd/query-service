@@ -14,9 +14,17 @@ public class EQueryUserStatistics : Entity<Guid>
     
     [Column("user_id")]
     [Comment("Идентификатор пользователя.")]
-    public Guid UserId { get; set; }
+    public Guid? UserId { get; set; }
     
     [Column("sign_in_count")]
     [Comment("Количество входов.")]
-    public int SignInCount { get; set; }
+    public int? SignInCount { get; set; }
+    
+    [Column("date_from")]
+    [Comment("Фильтр по дате - Дата От.")]
+    public DateTime DateFrom { get; set; }
+    
+    [Column("date_to")]
+    [Comment("Фильтр по дате - Дата По.")]
+    public DateTime DateTo { get; set; }
 }

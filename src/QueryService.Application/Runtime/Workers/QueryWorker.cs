@@ -1,4 +1,4 @@
-﻿using Application.Services.QueryService;
+﻿using Application.Services.QueryManagerService;
 using Domain.Contracts.Base;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,7 +16,7 @@ public class QueryWorker(
             using var scope = scopeFactory.CreateScope();
 
             var queryService = scope.ServiceProvider
-                .GetRequiredService<IQueryService>();
+                .GetRequiredService<IQueryManagerService>();
 
             var queries = await queryService.GetPendingQueries(new Request
             {

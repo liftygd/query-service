@@ -9,14 +9,14 @@ using Infrastructure.Extensions;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Services.QueryService;
+namespace Application.Services.QueryManagerService;
 
-public class QueryService(
+public sealed class QueryManagerService(
     IRepository<EQuery> eQueryRepository,
     IQueryDispatcher dispatcher,
     IClockService clockService,
     QueryOptions queryOptions) 
-    : IQueryService
+    : IQueryManagerService
 {
     public async Task<bool> ExecuteQueryAsync(QueryDispatchRequest queryDispatchRequest)
     {
@@ -30,8 +30,25 @@ public class QueryService(
         if (existingQuery == null)
             throw new ApplicationException($"Не найден активный запрос с идентификатором {queryDispatchRequest.QueryId}.");
         
-        await dispatcher.ExecuteAsync(queryDispatchRequest, existingQuery);
+        await dispatcher.ExecuteAsync(existingQuery);
         return true;
+    }
+
+    public async Task<Guid> CreateQueryAsync(QueryDispatchRequest queryDispatchRequest)
+    {
+        var queryModel = new EQuery
+        {
+            QueryType = queryDispatchRequest.QueryType,
+            State = QueryState.Pending
+        };
+
+        await eQueryRepository.InsertAsync(queryModel);
+        await eQueryRepository.SaveChangesAsync();
+
+        queryDispatchRequest.SetQueryId(queryModel.Id);
+        await dispatcher.CreateAsync(queryDispatchRequest);
+
+        return queryModel.Id;
     }
 
     public async Task<List<QueryDispatchRequest>> GetPendingQueries(Request request)
@@ -54,6 +71,7 @@ public class QueryService(
     }
 
     public async Task<QueryInfoResponse<TResponse>?> GetQueryInfoAsync<TResponse>(QueryInfoRequest queryInfoRequest)
+        where TResponse : class
     {
         var existingQuery = await (from eQuery in eQueryRepository.AsNoTracking
                 where eQuery.Id == queryInfoRequest.QueryId
@@ -63,7 +81,7 @@ public class QueryService(
         if (existingQuery == null)
             throw new ApplicationException($"Не найден активный запрос с идентификатором {queryInfoRequest.QueryId}.");
 
-        var data = await dispatcher.GetQueryResultAsync<TResponse?>(existingQuery);
+        var data = await dispatcher.GetQueryResultAsync<TResponse>(existingQuery);
         
         // Высчитываем прогресс.
         var elapsed = clockService.UtcNow - existingQuery.CreatedAt;

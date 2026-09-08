@@ -13,13 +13,18 @@ public interface IQueryHandler
     /// Тип запроса.
     /// </summary>
     QueryType Type { get; }
+    
+    /// <summary>
+    /// Создание запроса.
+    /// </summary>
+    /// <param name="request">Данные запроса.</param>
+    Task CreateAsync(QueryDispatchRequest request);
 
     /// <summary>
     /// Обработка запроса.
     /// </summary>
     /// <param name="query">Данные запроса.</param>
-    /// <param name="request">Данные для фильтрации.</param>
-    Task ExecuteAsync(QueryDispatchRequest request, EQuery query);
+    Task ExecuteAsync(EQuery query);
     
     /// <summary>
     /// Получение результата запроса.
@@ -27,5 +32,12 @@ public interface IQueryHandler
     /// <param name="query">Данные запроса.</param>
     /// <typeparam name="TResponse">Тип данных запроса.</typeparam>
     /// <returns>Данные или NULL.</returns>
-    Task<TResponse?> GetQueryResultAsync<TResponse>(EQuery query);
+    Task<TResponse?> GetQueryResultAsync<TResponse>(EQuery query)
+        where TResponse : class;
+}
+
+public interface IQueryHandler<TResponseType> : IQueryHandler
+    where TResponseType : class
+{
+    Task<TResponseType?> GetTypeQueryResultAsync(EQuery query);
 }
