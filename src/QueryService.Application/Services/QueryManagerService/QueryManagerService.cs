@@ -8,6 +8,7 @@ using Domain.Enums;
 using Infrastructure.Extensions;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Application.Services.QueryManagerService;
 
@@ -15,7 +16,7 @@ public sealed class QueryManagerService(
     IRepository<EQuery> eQueryRepository,
     IQueryDispatcher dispatcher,
     IClockService clockService,
-    QueryOptions queryOptions) 
+    IOptions<QueryOptions> queryOptions) 
     : IQueryManagerService
 {
     public async Task<bool> ExecuteQueryAsync(QueryDispatchRequest queryDispatchRequest)
@@ -54,7 +55,7 @@ public sealed class QueryManagerService(
     public async Task<List<QueryDispatchRequest>> GetPendingQueries(Request request)
     {
         var threshold = clockService.UtcNow.Subtract(
-            TimeSpan.FromMilliseconds(queryOptions.ProcessingDurationMS));
+            TimeSpan.FromMilliseconds(queryOptions.Value.ProcessingDurationMS));
         
         var pendingQueries = await (from eQuery in eQueryRepository.AsNoTracking
                                                     where eQuery.State == QueryState.Pending
@@ -86,7 +87,7 @@ public sealed class QueryManagerService(
         // Высчитываем прогресс.
         var elapsed = clockService.UtcNow - existingQuery.CreatedAt;
         var percentage = (int) Math.Clamp(
-            Math.Floor(elapsed.TotalMilliseconds / queryOptions.ProcessingDurationMS),
+            Math.Floor(elapsed.TotalMilliseconds / queryOptions.Value.ProcessingDurationMS * 100),
             0,
             100);
 

@@ -25,7 +25,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Release
       - ASPNETCORE_URLS=http://+:8080
-      - ConnectionStrings__Database=Server=query.db;Port=5432;Database=query_service;Username=postgres;Password=postgres
+      - ConnectionStrings__Default=Server=query.db;Port=5432;Database=query_service;Username=postgres;Password=postgres
     depends_on:
         query.db:
           condition: service_healthy

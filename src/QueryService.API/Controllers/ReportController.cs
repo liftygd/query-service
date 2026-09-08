@@ -23,6 +23,6 @@ public class ReportController(
     [SwaggerResponse(200, "Успешная операция", typeof(Response<QueryInfoResponse<object>?>))]
     [SwaggerResponse(400, "Ошибка операции", typeof(Response<string>))]
     [HttpGet("info")]
-    public async Task<IActionResult> GetReportInfo([FromBody] QueryInfoRequest queryInfoRequest)
+    public async Task<IActionResult> GetReportInfo([FromQuery] QueryInfoRequest queryInfoRequest)
         => Ok(await reportService.GetQueryInfoAsync(queryInfoRequest));
 }
