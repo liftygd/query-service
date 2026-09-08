@@ -29,6 +29,8 @@
    ```
 
 5. Доступ:
+   ```sh
    Сервис: localhost:5000
    Postgres: localhost:5435
    Swagger: localhost:5000/swagger/index.html
+   ```
